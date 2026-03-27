@@ -60,25 +60,31 @@
 
 
 
+
+
+
+
+
+
+
 <!-- Hero Section -->
 <section class="w-full px-4 pt-16 md:pt-10 pb-6">
 
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-4 md:gap-6">
     
-    <!-- LEFT: Circular Image with simple black border -->
+    <!-- LEFT: Perfect Circular Image (no gap) -->
     <div class="flex justify-center md:justify-end w-full md:w-1/2">
       
-      <div class="p-2 rounded-full border-2 border-black bg-white">
-        <img 
-          src="circularlogo.jpg" 
-          alt="Profile"
-          class="
-            w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48
-            object-cover 
-            rounded-full
-          "
-        >
-      </div>
+      <img 
+        src="circularlogo.jpg" 
+        alt="Profile"
+        class="
+          w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48
+          object-cover 
+          rounded-full
+          border-4 border-black
+        "
+      >
 
     </div>
 
@@ -94,13 +100,13 @@
         Hi, I am Tukaram Kitekar
       </h2>
 
-      <!-- Subheading -->
+      <!-- Typing Text -->
       <p class="
         text-lg sm:text-xl 
         font-semibold 
         mb-2
       ">
-        Web Developer
+        <span id="typing"></span>
       </p>
 
       <!-- Paragraph -->
@@ -119,6 +125,49 @@
 
 </section>
 
+<!-- ✅ Typing Script -->
+<script id="typingScript">
+  const texts = ["Web Developer", "App Developer"];
+  let i = 0;
+  let j = 0;
+  let currentText = "";
+  let isDeleting = false;
+
+  function type() {
+    currentText = texts[i];
+
+    if (!isDeleting) {
+      document.getElementById("typing").innerHTML = currentText.substring(0, j + 1);
+      j++;
+      if (j === currentText.length) {
+        isDeleting = true;
+        setTimeout(type, 1200);
+        return;
+      }
+    } else {
+      document.getElementById("typing").innerHTML = currentText.substring(0, j - 1);
+      j--;
+      if (j === 0) {
+        isDeleting = false;
+        i = (i + 1) % texts.length;
+      }
+    }
+
+    setTimeout(type, isDeleting ? 40 : 80);
+  }
+
+  type();
+</script>
+
+
+
+
+
+
+
+
+
+  
   
 
 </body>
